@@ -18,9 +18,10 @@
         
         .button-container {
             display: flex;
+            flex-direction: column; /* Affichage en liste verticale */
             gap: 20px;
-            flex-wrap: wrap;
             padding: 20px;
+            align-items: center;
         }
         
         .sound-button {
@@ -28,6 +29,9 @@
             background: none;
             cursor: pointer;
             transition: transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Espace entre l'image et le texte */
         }
         
         .sound-button:hover {
@@ -43,6 +47,11 @@
             height: auto;
         }
         
+        .button-label {
+            font-size: 16px;
+            color: #333;
+        }
+        
         .credits {
             position: fixed;
             bottom: 10px;
@@ -54,13 +63,20 @@
 <body>
     <div class="button-container">
         <button class="sound-button" onclick="playSound('son1.mp3')">
-            <img src="bouton.png" alt="Bouton 1">
+            <img src="bouton.png" alt="Bouton Cri 1">
+            <span class="button-label">Cri 1</span>
         </button>
         <button class="sound-button" onclick="playSound('son2.mp3')">
-            <img src="bouton.png" alt="Bouton 2">
+            <img src="bouton.png" alt="Bouton Cri 2">
+            <span class="button-label">Cri 2</span>
         </button>
         <button class="sound-button" onclick="playSound('son3.mp3')">
-            <img src="bouton.png" alt="Bouton 3">
+            <img src="bouton.png" alt="Bouton Cri 3">
+            <span class="button-label">Cri 3</span>
+        </button>
+        <button class="sound-button" onclick="playSound('son4.mp3')">
+            <img src="bouton.png" alt="Bouton ftg toi ou quoi">
+            <span class="button-label">ftg toi ou quoi</span>
         </button>
     </div>
     
