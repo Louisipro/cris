@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutons Sonores Polyphoniques</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+        
+        .button-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        
+        .sound-button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .sound-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .sound-button:active {
+            transform: scale(0.95);
+        }
+        
+        img {
+            width: 100px;
+            height: auto;
+        }
+        
+        .credits {
+            position: fixed;
+            bottom: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button class="sound-button" onclick="playSound('son1.mp3')">
+            <img src="bouton.png" alt="Bouton 1">
+        </button>
+        <button class="sound-button" onclick="playSound('son2.mp3')">
+            <img src="bouton.png" alt="Bouton 2">
+        </button>
+        <button class="sound-button" onclick="playSound('son3.mp3')">
+            <img src="bouton.png" alt="Bouton 3">
+        </button>
+    </div>
+    
+    <div class="credits">Codé par LOUISI-INC</div>
+
+    <script>
+        function playSound(soundFile) {
+            const audio = new Audio(soundFile);
+            audio.volume = 1.0;
+            audio.play();
+        }
+    </script>
+</body>
+</html>
