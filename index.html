@@ -3,91 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boutons Sonores Polyphoniques</title>
+    <title>Sons Louisi</title>
     <style>
+        /* Réinitialisation et style global */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e0e7ff, #f9fafb);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             flex-direction: column;
-        }
-        
-        .button-container {
-            display: flex;
-            flex-direction: column; /* Affichage en liste verticale */
-            gap: 20px;
+            overflow: auto;
             padding: 20px;
-            align-items: center;
         }
-        
+
+        /* Conteneur des boutons */
+        .button-container {
+            display: grid;
+            gap: 16px;
+            max-width: 400px;
+            width: 100%;
+            padding: 24px;
+        }
+
+        /* Style des boutons */
         .sound-button {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 12px 16px;
+            background: #ffffff;
             border: none;
-            background: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
+            text-align: left;
+            width: 100%;
+        }
+
+        .sound-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            background: #f8fafc;
+        }
+
+        .sound-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Conteneur pour image et texte */
+        .button-header {
             display: flex;
             align-items: center;
-            gap: 10px; /* Espace entre l'image et le texte */
+            gap: 12px;
         }
-        
-        .sound-button:hover {
-            transform: scale(1.1);
+
+        /* Style des images */
+        .sound-button img {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 8px;
         }
-        
-        .sound-button:active {
-            transform: scale(0.95);
-        }
-        
-        img {
-            width: 100px;
-            height: auto;
-        }
-        
+
+        /* Étiquettes des boutons */
         .button-label {
             font-size: 16px;
-            color: #333;
+            font-weight: 500;
+            color: #1f2937;
+            text-transform: capitalize;
         }
-        
+
+        /* Style du curseur de volume */
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .volume-control label {
+            font-size: 12px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .volume-control input[type="range"] {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 3px;
+            outline: none;
+            transition: background 0.2s;
+        }
+
+        .volume-control input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #4b5563;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .volume-control input[type="range"]::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: #4b5563;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .volume-control input[type="range"]:hover {
+            background: #d1d5db;
+        }
+
+        .volume-control input[type="range"]:hover::-webkit-slider-thumb {
+            background: #1f2937;
+        }
+
+        .volume-control input[type="range"]:hover::-moz-range-thumb {
+            background: #1f2937;
+        }
+
+        /* Crédits */
         .credits {
             position: fixed;
-            bottom: 10px;
-            font-size: 14px;
-            color: #666;
+            bottom: 16px;
+            font-size: 12px;
+            font-weight: 400;
+            color: #6b7280;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .credits:hover {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .button-container {
+                padding: 16px;
+            }
+
+            .sound-button {
+                padding: 10px 14px;
+            }
+
+            .sound-button img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .button-label {
+                font-size: 14px;
+            }
+
+            .volume-control label {
+                font-size: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="button-container">
-        <button class="sound-button" onclick="playSound('son1.mp3')">
-            <img src="bouton.png" alt="Bouton Cri 1">
-            <span class="button-label">Cri 1</span>
+        <button class="sound-button" data-sound="son1.mp3">
+            <div class="button-header">
+                <img src="bouton.png" alt="Bouton Cri 1">
+                <span class="button-label">Cri 1</span>
+            </div>
+            <div class="volume-control">
+                <label>Volume:</label>
+                <input type="range" min="0" max="1" step="0.01" value="1" class="volume-slider">
+            </div>
         </button>
-        <button class="sound-button" onclick="playSound('son2.mp3')">
-            <img src="bouton.png" alt="Bouton Cri 2">
-            <span class="button-label">Cri 2</span>
+        <button class="sound-button" data-sound="son2.mp3">
+            <div class="button-header">
+                <img src="bouton.png" alt="Bouton Cri 2">
+                <span class="button-label">Cri 2</span>
+            </div>
+            <div class="volume-control">
+                <label>Volume:</label>
+                <input type="range" min="0" max="1" step="0.01" value="1" class="volume-slider">
+            </div>
         </button>
-        <button class="sound-button" onclick="playSound('son3.mp3')">
-            <img src="bouton.png" alt="Bouton Cri 3">
-            <span class="button-label">Cri 3</span>
+        <button class="sound-button" data-sound="son3.mp3">
+            <div class="button-header">
+                <img src="bouton.png" alt="Bouton Cri 3">
+                <span class="button-label">Cri 3</span>
+            </div>
+            <div class="volume-control">
+                <label>Volume:</label>
+                <input type="range" min="0" max="1" step="0.01" value="1" class="volume-slider">
+            </div>
         </button>
-        <button class="sound-button" onclick="playSound('son4.mp3')">
-            <img src="bouton.png" alt="Bouton ftg toi ou quoi">
-            <span class="button-label">ftg toi ou quoi</span>
+        <button class="sound-button" data-sound="son4.mp3">
+            <div class="button-header">
+                <img src="bouton.png" alt="Bouton ftg toi ou quoi">
+                <span class="button-label">Ftg toi ou quoi</span>
+            </div>
+            <div class="volume-control">
+                <label>Volume:</label>
+                <input type="range" min="0" max="1" step="0.01" value="1" class="volume-slider">
+            </div>
         </button>
     </div>
-    
+
     <div class="credits">Codé par LOUISI-INC</div>
 
     <script>
-        function playSound(soundFile) {
-            const audio = new Audio(soundFile);
-            audio.volume = 1.0;
-            audio.play();
-        }
+        document.querySelectorAll('.sound-button').forEach(button => {
+            const soundFile = button.dataset.sound;
+            const volumeSlider = button.querySelector('.volume-slider');
+
+            button.addEventListener('click', () => {
+                const audio = new Audio(soundFile);
+                audio.volume = parseFloat(volumeSlider.value);
+                audio.play().catch(error => {
+                    console.error('Erreur de lecture audio :', error);
+                });
+            });
+
+            // Mettre à jour le volume en temps réel
+            volumeSlider.addEventListener('input', () => {
+                // Optionnel : peut être utilisé pour prévisualiser le volume si un son est en cours
+            });
+        });
     </script>
 </body>
 </html>
